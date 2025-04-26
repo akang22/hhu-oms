@@ -1,0 +1,15 @@
+.~lock.test.xlsm#
+venv/
+demofolder/
+__pycache__/
+*.py[cod]
+*$py.class
+out.csv
+log.txt
+xirr/data
+.env
+.streamlit/secrets.toml
+log.txt
+build/
+*.DS_Store
+*.sqlite
