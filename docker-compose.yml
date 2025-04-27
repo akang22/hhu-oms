@@ -13,19 +13,31 @@ services:
     networks:
       - backend
 
-  streamlit:
-    build: .
-    container_name: portfolio_streamlit
+  migrate:
+    build:
+      context: .
     depends_on:
       - db
-    ports:
-      - "8501:8501"
-    volumes:
-      - .:/app
-    working_dir: /app
-    command: streamlit run app.py --server.port=8501 --server.address=0.0.0.0
+    entrypoint: >
+      bash -c "
+      alembic upgrade head
+      "
     environment:
       - DATABASE_URL=postgresql://portfolio_user:portfolio_pass@db:5432/portfolio_db
+    networks:
+      - backend
+
+  app:
+    build:
+      context: .
+    depends_on:
+      - db
+      - migrate
+    ports:
+      - "8501:8501"
+    environment:
+      - DATABASE_URL=postgresql://portfolio_user:portfolio_pass@db:5432/portfolio_db
+    command: streamlit run app.py --server.address=0.0.0.0
     networks:
       - backend
 
