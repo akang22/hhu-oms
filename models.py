@@ -57,7 +57,7 @@ class Holding(Base):
 
 
 # Replace with your actual DB URL, e.g., 'postgresql://user:pass@localhost/dbname'
-DATABASE_URL = 'postgresql://portfolio_user:portfolio_pass@localhost:5432/portfolio_db'
+DATABASE_URL = 'postgresql://portfolio_user:portfolio_pass@db:5432/portfolio_db'
 
 
 engine = create_engine(DATABASE_URL, echo=True)
